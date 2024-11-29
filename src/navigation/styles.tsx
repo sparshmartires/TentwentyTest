@@ -13,11 +13,9 @@ const styles = StyleSheet.create({
   text: {
     textAlign: 'center',
     fontSize: 10,
-    fontWeight: 400,
     color: palette.lightBrown,
   },
   selectedText: {
-    fontWeight: 700,
     color: palette.white,
   },
 });

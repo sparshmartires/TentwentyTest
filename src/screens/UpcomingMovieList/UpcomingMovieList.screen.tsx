@@ -1,12 +1,13 @@
 // File: src/screens/MovieListScreen.tsx
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import {
   View,
   FlatList,
   StyleSheet,
   ActivityIndicator,
   Image,
+  Pressable,
 } from 'react-native';
 
 import images from '../../assets/images';
@@ -14,6 +15,7 @@ import UpcomingMovieCard from './UpcomingMovieCard.component';
 import { palette } from '../../theme/palette';
 import { useGetUpcomingMoviesQuery } from '../../services/api/movie';
 import Text from '../../components/Text.component';
+import { navigateTo } from '../../navigation/root.navigator';
 
 interface Movie {
   id: number;
@@ -34,7 +36,7 @@ const UpcomingMovieListScreen: React.FC = () => {
   );
 
   // Update the movie list when new data is fetched
-  React.useEffect(() => {
+  useEffect(() => {
     if (data && data.results) {
       const newMovies = data.results.map((movie) => ({
         id: movie.id,
@@ -55,14 +57,18 @@ const UpcomingMovieListScreen: React.FC = () => {
     }
   }, [isFetching, isEndReached, isError]);
 
+  const handleSearchPress = () => {
+    navigateTo('MovieSearchList'); 
+  };
+
   return (
     <View style={styles.upcomingMovieContainer}>
       {/* Header */}
       <View style={styles.headerContainer}>
         <Text weight='medium' style={styles.header}>Watch</Text>
-        <View style={styles.headerImageContainer}>
+        <Pressable style={styles.headerImageContainer} onPress={handleSearchPress}>
           <Image source={images.search} />
-        </View>
+        </Pressable>
       </View>
 
       {/* Movie List */}
