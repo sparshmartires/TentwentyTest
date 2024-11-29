@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import {
   View,
-  FlatList,
   StyleSheet,
 } from 'react-native';
 
 import images from '../../assets/images';
 import SearchBar from '../../components/SearchBar.component';
-import MovieCategory from './MovieCategory.component';
-import categories from './MovieSearchList.config';
+import MovieCategoryList from './MovieCategoryList.component';
 import { palette } from '../../theme/palette';
 
 const MovieSearchList: React.FC = () => {
@@ -28,14 +26,7 @@ const MovieSearchList: React.FC = () => {
       />
       </View>
       {/* Categories Grid */}
-      <FlatList
-        data={categories}
-        renderItem={({ item }) => <MovieCategory item={item}/>}
-        keyExtractor={(item) => item.id.toString()}
-        numColumns={2}
-        contentContainerStyle={styles.categoryList}
-        showsVerticalScrollIndicator={false}
-      />
+     <MovieCategoryList />
     </View>
   );
 };
@@ -52,12 +43,6 @@ const styles = StyleSheet.create({
    paddingBottom: 28,
    paddingHorizontal: 20,
    backgroundColor: palette.white,
-  },
-  categoryList: {
-    paddingVertical: 20,
-    paddingHorizontal: 20,
-    backgroundColor: palette.greyAccent,
-    gap: 10,
   },
 });
 

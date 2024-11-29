@@ -16,6 +16,7 @@ const images = {
     scifi: require('./categories/scifi.png'),
     thriller: require('./categories/thriller.png'),
   },
+  backArrow: require('./back-arrow.png'),
   search: require('./search.png'),
 };
 

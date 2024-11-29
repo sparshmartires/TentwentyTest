@@ -1,6 +1,6 @@
 // File: src/screens/MovieListScreen.tsx
 
-import React, { useState, useCallback, useEffect } from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import {
   View,
   FlatList,
@@ -12,10 +12,10 @@ import {
 
 import images from '../../assets/images';
 import UpcomingMovieCard from './UpcomingMovieCard.component';
-import { palette } from '../../theme/palette';
-import { useGetUpcomingMoviesQuery } from '../../services/api/movie';
+import {palette} from '../../theme/palette';
+import {useGetUpcomingMoviesQuery} from '../../services/api/movie';
 import Text from '../../components/Text.component';
-import { navigateTo } from '../../navigation/root.navigator';
+import {navigateTo} from '../../navigation/root.navigator';
 
 interface Movie {
   id: number;
@@ -30,21 +30,21 @@ const UpcomingMovieListScreen: React.FC = () => {
   const [isEndReached, setIsEndReached] = useState(false); // To prevent multiple triggers
 
   // Fetch movies using RTK query
-  const { data, isLoading, isFetching, isError } = useGetUpcomingMoviesQuery(
-    { page },
-    { skip: false } // Always fetch for the given page
+  const {data, isLoading, isFetching, isError} = useGetUpcomingMoviesQuery(
+    {page},
+    {skip: false}, // Always fetch for the given page
   );
 
   // Update the movie list when new data is fetched
   useEffect(() => {
     if (data && data.results) {
-      const newMovies = data.results.map((movie) => ({
+      const newMovies = data.results.map(movie => ({
         id: movie.id,
         title: movie.title,
         imageUrl: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
       }));
 
-      setMovies((prevMovies) => [...prevMovies, ...newMovies]); // Append new movies
+      setMovies(prevMovies => [...prevMovies, ...newMovies]); // Append new movies
     }
   }, [data]);
 
@@ -52,21 +52,30 @@ const UpcomingMovieListScreen: React.FC = () => {
   const loadMoreMovies = useCallback(() => {
     if (!isFetching && !isEndReached && !isError) {
       setIsEndReached(true); // Prevent multiple calls
-      setPage((prevPage) => prevPage + 1);
+      setPage(prevPage => prevPage + 1);
       setTimeout(() => setIsEndReached(false), 500); // Allow new calls after a delay
     }
   }, [isFetching, isEndReached, isError]);
 
   const handleSearchPress = () => {
-    navigateTo('MovieSearchList'); 
+    navigateTo('MovieSearchList');
+  };
+
+  const onUpcomingMovieCardPress = (movieId: number) => {
+    navigateTo('MovieDetailScreen', {movieId});
   };
 
   return (
     <View style={styles.upcomingMovieContainer}>
       {/* Header */}
       <View style={styles.headerContainer}>
-        <Text weight='medium' style={styles.header}>Watch</Text>
-        <Pressable style={styles.headerImageContainer} onPress={handleSearchPress}>
+        <Text weight="medium" style={styles.header}>
+          Watch
+        </Text>
+        <Pressable
+        hitSlop={20}
+          style={styles.headerImageContainer}
+          onPress={handleSearchPress}>
           <Image source={images.search} />
         </Pressable>
       </View>
@@ -77,8 +86,13 @@ const UpcomingMovieListScreen: React.FC = () => {
       ) : (
         <FlatList
           data={movies}
-          renderItem={({ item }) => <UpcomingMovieCard {...item} />}
-          keyExtractor={(item) => item.title.toString()}
+          renderItem={({item}) => (
+            <UpcomingMovieCard
+              {...item}
+              onPress={() => onUpcomingMovieCardPress(item.id)}
+            />
+          )}
+          keyExtractor={item => item.title.toString()}
           contentContainerStyle={styles.movieListContainer}
           showsVerticalScrollIndicator={false}
           onEndReached={loadMoreMovies}

@@ -1,4 +1,8 @@
 declare module '@movie' {
+  interface Genre {
+    id: number;
+    name: string;
+  }
   interface Movie {
     adult: boolean;
     backdrop_path: string | null;
@@ -14,5 +18,6 @@ declare module '@movie' {
     video: boolean;
     vote_average: number;
     vote_count: number;
+    genres: Genre[];
   }
 }

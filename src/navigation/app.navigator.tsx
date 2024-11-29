@@ -3,11 +3,15 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import UpcomingMovieListScreen from '../screens/UpcomingMovieList/UpcomingMovieList.screen';
 import TabNavigator from './tab.navigator';
 import MovieSearchList from '../screens/MovieSearchList/MovieSearchList.screen';
+import MovieDetailScreen from '../screens/MovieDetail/MovieDetail.screen';
 
 export type StackParamList = {
   TabNavigator: undefined;
-  UpcomingMovieList: undefined;
+  UpcomingMovieListScreen: undefined;
   MovieSearchList: undefined;
+  MovieDetailScreen: {
+    movieId: number;
+  };
 };
 
 const Stack = createNativeStackNavigator<StackParamList>();
@@ -19,8 +23,12 @@ const AppNavigator = () => {
         headerShown: false,
       }}>
       <Stack.Screen name="TabNavigator" component={TabNavigator} />
-      <Stack.Screen name="UpcomingMovieList" component={UpcomingMovieListScreen} />
+      <Stack.Screen
+        name="UpcomingMovieListScreen"
+        component={UpcomingMovieListScreen}
+      />
       <Stack.Screen name="MovieSearchList" component={MovieSearchList} />
+      <Stack.Screen name="MovieDetailScreen" component={MovieDetailScreen} />
     </Stack.Navigator>
   );
 };
