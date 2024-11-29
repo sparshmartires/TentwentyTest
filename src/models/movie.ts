@@ -20,4 +20,5 @@ declare module '@movie' {
     vote_count: number;
     genres: Genre[];
   }
+  
 }

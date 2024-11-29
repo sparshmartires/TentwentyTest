@@ -1,4 +1,4 @@
-import {Movie, UpcomingMovieApiResponse} from '@movie';
+import {Movie, MovieVideoApiResponse, UpcomingMovieApiResponse} from '@movie';
 
 import {api} from '.';
 
@@ -16,9 +16,19 @@ export const movieApi = api.injectEndpoints({
         method: 'GET',
       }),
     }),
+    getMovieVideosById: build.query<MovieVideoApiResponse, {movieId: number}>({
+      query: ({movieId}) => ({
+        url: `movie/${movieId}/videos`,
+        method: 'GET',
+      }),
+    }),
   }),
 
   overrideExisting: true,
 });
 
-export const {useGetUpcomingMoviesQuery, useGetMovieDetailByIdQuery} = movieApi;
+export const {
+  useGetUpcomingMoviesQuery,
+  useGetMovieDetailByIdQuery,
+  useGetMovieVideosByIdQuery,
+} = movieApi;

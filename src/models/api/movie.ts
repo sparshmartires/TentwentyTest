@@ -10,4 +10,12 @@ declare module '@movie' {
     total_pages: number;
     total_results: number;
   }
+  interface Video {
+    key: string;
+    type: string;
+    site: string;
+  }
+  interface MovieVideoApiResponse {
+    results: Video[];
+  }
 }

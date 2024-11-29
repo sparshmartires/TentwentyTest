@@ -4,6 +4,7 @@ import UpcomingMovieListScreen from '../screens/UpcomingMovieList/UpcomingMovieL
 import TabNavigator from './tab.navigator';
 import MovieSearchList from '../screens/MovieSearchList/MovieSearchList.screen';
 import MovieDetailScreen from '../screens/MovieDetail/MovieDetail.screen';
+import TrailerPlayerScreen from '../screens/TrailerPlayer.screen';
 
 export type StackParamList = {
   TabNavigator: undefined;
@@ -11,6 +12,9 @@ export type StackParamList = {
   MovieSearchList: undefined;
   MovieDetailScreen: {
     movieId: number;
+  };
+  TrailerPlayerScreen: {
+    videoKey: string;
   };
 };
 
@@ -29,6 +33,13 @@ const AppNavigator = () => {
       />
       <Stack.Screen name="MovieSearchList" component={MovieSearchList} />
       <Stack.Screen name="MovieDetailScreen" component={MovieDetailScreen} />
+      <Stack.Screen
+        name="TrailerPlayerScreen"
+        component={TrailerPlayerScreen}
+        options={{
+          orientation: 'landscape',
+        }}
+      />
     </Stack.Navigator>
   );
 };

@@ -3,7 +3,6 @@ import {
   View,
   StyleSheet,
   ImageBackground,
-  TouchableOpacity,
   ScrollView,
   Image,
   Pressable,
@@ -14,9 +13,9 @@ import images from '../../assets/images';
 import Chip from '../../components/Chip/Chip.component';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {StackParamList} from '../../navigation/app.navigator';
-import {useGetMovieDetailByIdQuery} from '../../services/api/movie';
+import {useGetMovieDetailByIdQuery, useGetMovieVideosByIdQuery} from '../../services/api/movie';
 import {formatDate, getRandomColor} from '../../utils';
-import {goBack} from '../../navigation/root.navigator';
+import {goBack, navigateTo} from '../../navigation/root.navigator';
 
 type MovieDetailProps = NativeStackScreenProps<
   StackParamList,
@@ -27,6 +26,9 @@ const MovieDetailScreen = ({route}: MovieDetailProps) => {
   const movieId = route.params?.movieId;
 
   const {data, isLoading, isFetching, error} = useGetMovieDetailByIdQuery({
+    movieId,
+  });
+  const {data: movieVideos} = useGetMovieVideosByIdQuery({
     movieId,
   });
 
@@ -66,17 +68,17 @@ const MovieDetailScreen = ({route}: MovieDetailProps) => {
             </Text>
           )}
 
-          <TouchableOpacity style={styles.getTicketsButton}>
+          <Pressable style={styles.getTicketsButton}>
             <Text style={styles.getTicketsText} weight="bold">
               Get Tickets
             </Text>
-          </TouchableOpacity>
+          </Pressable>
 
-          <TouchableOpacity style={styles.trailerButton}>
+          <Pressable style={styles.trailerButton} onPress={() => navigateTo('TrailerPlayerScreen', { videoKey: movieVideos?.results?.find((video: any) => video.type === 'Trailer' && video.site === 'YouTube')?.key })}>
             <Text style={styles.trailerText} weight="bold">
               ▶ Watch Trailer
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </ImageBackground>
 
