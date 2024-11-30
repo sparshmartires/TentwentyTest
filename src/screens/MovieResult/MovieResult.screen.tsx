@@ -17,6 +17,7 @@ type MovieResultProps = NativeStackScreenProps<
 
 const MovieResultScreen = ({route}: MovieResultProps) => {
   const movieIds = route.params?.movieIds;
+  
   const onBackPress = () => {
     goBack();
   };

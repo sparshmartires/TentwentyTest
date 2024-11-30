@@ -6,6 +6,9 @@ import {
   ScrollView,
   Image,
   Pressable,
+  SafeAreaView,
+  StatusBar,
+  Platform,
 } from 'react-native';
 import {palette} from '../../theme/palette';
 import Text from '../../components/Text.component';
@@ -23,8 +26,9 @@ type MovieDetailProps = NativeStackScreenProps<
 >;
 
 const MovieDetailScreen = ({route}: MovieDetailProps) => {
+  const statusBarHeight = Platform.OS === 'android' ? StatusBar.currentHeight || 0 : 0;
   const movieId = route.params?.movieId;
-
+console.log(statusBarHeight)
   const {data, isLoading, isFetching, error} = useGetMovieDetailByIdQuery({
     movieId,
   });
@@ -36,6 +40,14 @@ const MovieDetailScreen = ({route}: MovieDetailProps) => {
     goBack();
   };
 
+  const onWatchTrailerPress = () => {
+    navigateTo('TrailerPlayerScreen', { videoKey: movieVideos?.results?.find((video: any) => video.type === 'Trailer' && video.site === 'YouTube')?.key })
+  };
+
+  const onGetTicketsPress = () => {
+    navigateTo('MovieHallSelectionScreen')
+  };
+
   if (isLoading && isFetching) {
     return <Text>Loading...</Text>;
   }
@@ -43,13 +55,15 @@ const MovieDetailScreen = ({route}: MovieDetailProps) => {
   const {release_date, genres, overview, poster_path} = data ?? {};
 
   return (
+    <SafeAreaView style={styles.container}>
+      <StatusBar translucent backgroundColor="transparent" />
     <ScrollView style={styles.container}>
       {/* Header Section */}
       <ImageBackground
         source={{
           uri: `https://image.tmdb.org/t/p/w500${poster_path}`, // Replace with the actual poster image URL
         }}
-        style={styles.headerBackground}
+        style={[styles.headerBackground, {marginTop: -statusBarHeight}]}
         resizeMode="cover">
         <View style={styles.headerContent}>
           <View style={styles.backArrowContainer}>
@@ -68,13 +82,13 @@ const MovieDetailScreen = ({route}: MovieDetailProps) => {
             </Text>
           )}
 
-          <Pressable style={styles.getTicketsButton}>
+          <Pressable style={styles.getTicketsButton} onPress={onGetTicketsPress}>
             <Text style={styles.getTicketsText} weight="bold">
               Get Tickets
             </Text>
           </Pressable>
 
-          <Pressable style={styles.trailerButton} onPress={() => navigateTo('TrailerPlayerScreen', { videoKey: movieVideos?.results?.find((video: any) => video.type === 'Trailer' && video.site === 'YouTube')?.key })}>
+          <Pressable style={styles.trailerButton} onPress={onWatchTrailerPress}>
             <Text style={styles.trailerText} weight="bold">
               ▶ Watch Trailer
             </Text>
@@ -105,6 +119,7 @@ const MovieDetailScreen = ({route}: MovieDetailProps) => {
         <Text style={styles.overviewText}>{overview}</Text>
       </View>
     </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -121,9 +136,10 @@ const styles = StyleSheet.create({
   },
   headerBackground: {
     width: '100%',
-    height: 430,
+    height: 498,
   },
   headerContent: {
+    paddingTop: 60,
     padding: 20,
   },
   watchText: {
@@ -140,7 +156,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: palette.white,
     textAlign: 'center',
-    paddingTop: 175,
+    paddingTop: 195,
   },
   getTicketsButton: {
     backgroundColor: palette.primary,

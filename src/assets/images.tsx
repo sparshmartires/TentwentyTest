@@ -21,6 +21,16 @@ const images = {
     searchResult1: require('./searchResults/search-result1.png'),
     searchResult2: require('./searchResults/search-result2.png'),
   },
+  hallLayout: {
+    movieHallLayout: require('./hallLayout/hall-layout.png'),
+  },
+  seatSelection: {
+    screen: require('./seatSelection/screen.png'),
+    unavailable: require('./seatSelection/unavailable-seat.png'),
+    selected: require('./seatSelection/selected-seat.png'),
+    vip: require('./seatSelection/vip-seat.png'),
+    regular: require('./seatSelection/regular-seat.png'),
+  },
   backArrow: require('./back-arrow.png'),
   backArrowDark: require('./back-arrow-dark.png'),
   search: require('./search.png'),

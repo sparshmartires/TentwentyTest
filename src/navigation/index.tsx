@@ -8,7 +8,7 @@ import {navigationRef} from './root.navigator';
 const Navigation = () => {
   return (
     <NavigationContainer ref={navigationRef}>
-      <StatusBar animated />
+      <StatusBar animated backgroundColor="white" barStyle="dark-content" />
       <AppNavigator />
     </NavigationContainer>
   );

@@ -5,6 +5,7 @@ export const palette = {
   darkBrown: '#2E2739',
   greyAccent: "#F6F6FA",
   greyAccent1: "#DBDBDF",
+  greyAccent2: "#A6A6A61A",
   blackAccent: "#202C43",
   primary: "#61C3F2",
   green: "#15D2BC",
