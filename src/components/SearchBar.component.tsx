@@ -67,7 +67,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       />
       {/* Clear Icon */}
       {text.length > 0 && clearIcon && (
-        <Pressable onPress={handleClear} style={styles.clearButton}>
+        <Pressable onPress={handleClear} style={styles.clearButton} hitSlop={20}>
           <Image
             source={clearIcon}
             style={styles.icon}
@@ -88,8 +88,8 @@ const styles = StyleSheet.create({
     height: 52,
   },
   icon: {
-    width: 18,
-    height: 18,
+    width: 15,
+    height: 15,
     paddingRight: 16,
   },
   input: {

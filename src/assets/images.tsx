@@ -16,8 +16,15 @@ const images = {
     scifi: require('./categories/scifi.png'),
     thriller: require('./categories/thriller.png'),
   },
+  searchResults: {
+    searchResult: require('./searchResults/search-result.png'),
+    searchResult1: require('./searchResults/search-result1.png'),
+    searchResult2: require('./searchResults/search-result2.png'),
+  },
   backArrow: require('./back-arrow.png'),
   search: require('./search.png'),
+  close: require('./close.png'),
+  more: require('./more.png'),
 };
 
 export default images;
