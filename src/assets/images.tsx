@@ -3,6 +3,7 @@ const images = {
     dashboard: require('./navigation/dashboard.png'),
     mediaLibrary: require('./navigation/media-library.png'),
     watch: require('./navigation/watch.png'),
+    moreTab: require('./more-tab.png'),
   },
   movieCategories: {
     comedies: require('./categories/comedies.png'),
@@ -36,6 +37,7 @@ const images = {
   search: require('./search.png'),
   close: require('./close.png'),
   more: require('./more.png'),
+
 };
 
 export default images;

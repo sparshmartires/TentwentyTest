@@ -85,7 +85,7 @@ const TabNavigator = () => {
         name={tabConfig.More.name as keyof TabParamList}
         options={{
           tabBarButton: ({onPress}) =>
-            renderTabBarButton(onPress, tabConfig.MediaLibrary.name),
+            renderTabBarButton(onPress, tabConfig.More.name),
         }}
         component={UpcomingMovieListScreen}
       />

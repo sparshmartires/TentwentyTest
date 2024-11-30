@@ -12,7 +12,7 @@ const tabConfig = {
     value: 'Media Library',
     image: images.navigation.mediaLibrary,
   },
-  More: {name: 'More', value: 'More', image: images.navigation.mediaLibrary},
+  More: {name: 'More', value: 'More', image: images.navigation.moreTab},
 };
 
 export default tabConfig;

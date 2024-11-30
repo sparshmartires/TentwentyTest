@@ -161,7 +161,8 @@ const styles = StyleSheet.create({
   },
   header: {
     paddingHorizontal: 20,
-    paddingVertical: 15,
+    paddingTop: 40,
+    paddingBottom: 15,
     display: 'flex',
     flexDirection: 'row',
     backgroundColor: palette.white,

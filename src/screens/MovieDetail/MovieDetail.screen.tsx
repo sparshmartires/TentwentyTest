@@ -16,9 +16,13 @@ import images from '../../assets/images';
 import Chip from '../../components/Chip/Chip.component';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {StackParamList} from '../../navigation/app.navigator';
-import {useGetMovieDetailByIdQuery, useGetMovieVideosByIdQuery} from '../../services/api/movie';
+import {
+  useGetMovieDetailByIdQuery,
+  useGetMovieVideosByIdQuery,
+} from '../../services/api/movie';
 import {formatDate, getRandomColor} from '../../utils';
 import {goBack, navigateTo} from '../../navigation/root.navigator';
+import LinearGradient from 'react-native-linear-gradient';
 
 type MovieDetailProps = NativeStackScreenProps<
   StackParamList,
@@ -26,10 +30,10 @@ type MovieDetailProps = NativeStackScreenProps<
 >;
 
 const MovieDetailScreen = ({route}: MovieDetailProps) => {
-  const statusBarHeight = Platform.OS === 'android' ? StatusBar.currentHeight || 0 : 0;
+  const statusBarHeight =
+    Platform.OS === 'android' ? StatusBar.currentHeight || 0 : 0;
   const movieId = route.params?.movieId;
-console.log(statusBarHeight)
-  const {data, isLoading, isFetching, error} = useGetMovieDetailByIdQuery({
+  const {data, isLoading, isFetching} = useGetMovieDetailByIdQuery({
     movieId,
   });
   const {data: movieVideos} = useGetMovieVideosByIdQuery({
@@ -41,11 +45,15 @@ console.log(statusBarHeight)
   };
 
   const onWatchTrailerPress = () => {
-    navigateTo('TrailerPlayerScreen', { videoKey: movieVideos?.results?.find((video: any) => video.type === 'Trailer' && video.site === 'YouTube')?.key })
+    navigateTo('TrailerPlayerScreen', {
+      videoKey: movieVideos?.results?.find(
+        (video: any) => video.type === 'Trailer' && video.site === 'YouTube',
+      )?.key,
+    });
   };
 
   const onGetTicketsPress = () => {
-    navigateTo('MovieHallSelectionScreen')
+    navigateTo('MovieHallSelectionScreen');
   };
 
   if (isLoading && isFetching) {
@@ -57,68 +65,78 @@ console.log(statusBarHeight)
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar translucent backgroundColor="transparent" />
-    <ScrollView style={styles.container}>
-      {/* Header Section */}
-      <ImageBackground
-        source={{
-          uri: `https://image.tmdb.org/t/p/w500${poster_path}`, // Replace with the actual poster image URL
-        }}
-        style={[styles.headerBackground, {marginTop: -statusBarHeight}]}
-        resizeMode="cover">
-        <View style={styles.headerContent}>
-          <View style={styles.backArrowContainer}>
-            <Pressable onPress={onBackPress} hitSlop={20}>
-              <Image source={images.backArrow} />
+      <ScrollView style={styles.container}>
+        {/* Header Section */}
+        <ImageBackground
+          source={{
+            uri: `https://image.tmdb.org/t/p/w500${poster_path}`, // Replace with the actual poster image URL
+          }}
+          style={[styles.headerBackground, {marginTop: -statusBarHeight}]}
+          resizeMode="cover">
+          <LinearGradient
+            colors={['rgba(0, 0, 0, 0.5)', 'rgba(0, 0, 0, 0)']}
+            style={styles.gradientOverlay}
+            start={{x: 0, y: 1}}
+            end={{x: 0, y: 0}}
+          />
+          <View style={styles.headerContent}>
+            <View style={styles.backArrowContainer}>
+              <Pressable onPress={onBackPress} hitSlop={20}>
+                <Image source={images.backArrow} />
+              </Pressable>
+
+              <Text weight="medium" style={styles.watchText}>
+                Watch
+              </Text>
+            </View>
+
+            {release_date && (
+              <Text style={styles.subtitle} weight="medium">
+                In Theaters {formatDate(release_date)}
+              </Text>
+            )}
+
+            <Pressable
+              style={styles.getTicketsButton}
+              onPress={onGetTicketsPress}>
+              <Text style={styles.getTicketsText} weight="bold">
+                Get Tickets
+              </Text>
             </Pressable>
 
-            <Text weight="medium" style={styles.watchText}>
-              Watch
-            </Text>
+            <Pressable
+              style={styles.trailerButton}
+              onPress={onWatchTrailerPress}>
+              <Text style={styles.trailerText} weight="bold">
+                ▶ Watch Trailer
+              </Text>
+            </Pressable>
           </View>
+        </ImageBackground>
 
-          {release_date && (
-            <Text style={styles.subtitle} weight="medium">
-              In Theaters {formatDate(release_date)}
-            </Text>
-          )}
-
-          <Pressable style={styles.getTicketsButton} onPress={onGetTicketsPress}>
-            <Text style={styles.getTicketsText} weight="bold">
-              Get Tickets
-            </Text>
-          </Pressable>
-
-          <Pressable style={styles.trailerButton} onPress={onWatchTrailerPress}>
-            <Text style={styles.trailerText} weight="bold">
-              ▶ Watch Trailer
-            </Text>
-          </Pressable>
+        {/* Genres Section */}
+        <View style={styles.genresContainer}>
+          <Text style={styles.sectionTitle} weight="medium">
+            Genres
+          </Text>
+          <View style={styles.genresList}>
+            {genres
+              ?.map(genre => genre.name)
+              .map(genre => (
+                <Chip label={genre} color={getRandomColor()} />
+              ))}
+          </View>
+          <View style={styles.divider} />
         </View>
-      </ImageBackground>
 
-      {/* Genres Section */}
-      <View style={styles.genresContainer}>
-        <Text style={styles.sectionTitle} weight="medium">
-          Genres
-        </Text>
-        <View style={styles.genresList}>
-          {genres
-            ?.map(genre => genre.name)
-            .map(genre => (
-              <Chip label={genre} color={getRandomColor()} />
-            ))}
+        {/* Overview Section */}
+        <View style={styles.overviewContainer}>
+          <Text style={styles.sectionTitle} weight="medium">
+            Overview
+          </Text>
+          <Text style={styles.overviewText}>{overview}</Text>
         </View>
-        <View style={styles.divider} />
-      </View>
-
-      {/* Overview Section */}
-      <View style={styles.overviewContainer}>
-        <Text style={styles.sectionTitle} weight="medium">
-          Overview
-        </Text>
-        <Text style={styles.overviewText}>{overview}</Text>
-      </View>
-    </ScrollView>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -187,6 +205,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 15,
     fontSize: 14,
+  },
+  gradientOverlay: {
+    ...StyleSheet.absoluteFillObject, // Ensures the gradient covers the entire image
   },
   trailerText: {
     color: palette.white,
