@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   card: {
     borderRadius: 10,
     overflow: 'hidden',
-    position: 'relative', // Ensure children are properly positioned
+    position: 'relative', 
   },
   image: {
     width: '100%',
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   },
   overlay: {
     position: 'absolute',
-    bottom: 10, // Ensure text is placed above the gradient
+    bottom: 10,
     left: 20,
     right: 20,
   },

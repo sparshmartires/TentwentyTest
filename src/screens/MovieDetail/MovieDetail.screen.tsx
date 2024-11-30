@@ -18,9 +18,11 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {StackParamList} from '../../navigation/app.navigator';
 import {
   useGetMovieDetailByIdQuery,
+  useGetMovieImagesByIdQuery,
   useGetMovieVideosByIdQuery,
 } from '../../services/api/movie';
 import {formatDate, getRandomColor} from '../../utils';
+
 import {goBack, navigateTo} from '../../navigation/root.navigator';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -39,7 +41,9 @@ const MovieDetailScreen = ({route}: MovieDetailProps) => {
   const {data: movieVideos} = useGetMovieVideosByIdQuery({
     movieId,
   });
-
+  const {data: movieImages} = useGetMovieImagesByIdQuery({
+    movieId,
+  });
   const onBackPress = () => {
     goBack();
   };
@@ -60,7 +64,7 @@ const MovieDetailScreen = ({route}: MovieDetailProps) => {
     return <Text>Loading...</Text>;
   }
 
-  const {release_date, genres, overview, poster_path} = data ?? {};
+  const {release_date, genres, overview} = data ?? {};
 
   return (
     <SafeAreaView style={styles.container}>
@@ -69,7 +73,7 @@ const MovieDetailScreen = ({route}: MovieDetailProps) => {
         {/* Header Section */}
         <ImageBackground
           source={{
-            uri: `https://image.tmdb.org/t/p/w500${poster_path}`, // Replace with the actual poster image URL
+            uri: `https://image.tmdb.org/t/p/w500${movieImages?.backdrops[0]?.file_path}`, // Replace with the actual poster image URL
           }}
           style={[styles.headerBackground, {marginTop: -statusBarHeight}]}
           resizeMode="cover">

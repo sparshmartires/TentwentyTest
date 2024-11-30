@@ -15,7 +15,13 @@ declare module '@movie' {
     type: string;
     site: string;
   }
+  interface MovieImage {
+    file_path: string;
+  }
   interface MovieVideoApiResponse {
     results: Video[];
+  }
+  interface MovieImageApiResponse {
+    backdrops: MovieImage[];
   }
 }

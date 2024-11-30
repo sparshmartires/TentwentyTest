@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+
 import {StackParamList} from '../navigation/app.navigator';
 import {goBack} from '../navigation/root.navigator';
 
@@ -48,7 +49,9 @@ const TrailerPlayerScreen: React.FC<TrailerPlayerProps> = ({route}) => {
           if (state === 'ended') goBack();
         }}
       />
-      <Button title="Done" onPress={() => goBack()} />
+      <View style={styles.buttonContainer}>
+        <Button title="Done" onPress={goBack} />
+      </View>
     </View>
   );
 };
@@ -58,6 +61,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'black',
+  },
+  buttonContainer: {
+    position: 'absolute',
+    top: 20, // Adjust as needed
+    right: 20, // Adjust as needed
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Optional background for better visibility
+    borderRadius: 8, // Optional rounded corners
+    padding: 4, // Optional padding for the button container
   },
 });
 

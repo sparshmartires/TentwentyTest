@@ -5,7 +5,9 @@ import {
   Image,
   TouchableOpacity,
   ImageSourcePropType,
+  Pressable,
 } from 'react-native';
+
 import Text from '../../components/Text.component';
 import images from '../../assets/images';
 import {palette} from '../../theme/palette';
@@ -24,7 +26,7 @@ const SearchResultItem: React.FC<MovieListItemProps> = ({
   onPressAction,
 }) => {
   return (
-    <View style={styles.container}>
+    <Pressable style={styles.container} onPress={onPressAction}>
       {/* Image */}
       <Image source={imageUrl} style={styles.image} />
 
@@ -37,12 +39,9 @@ const SearchResultItem: React.FC<MovieListItemProps> = ({
           {overview}
         </Text>
       </View>
-
       {/* Action (Three Dots) */}
-      <TouchableOpacity onPress={onPressAction}>
-        <Image source={images.more} style={styles.more} />
-      </TouchableOpacity>
-    </View>
+      <Image source={images.more} style={styles.more} />
+    </Pressable>
   );
 };
 

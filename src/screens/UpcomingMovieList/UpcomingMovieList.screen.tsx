@@ -1,5 +1,3 @@
-// File: src/screens/MovieListScreen.tsx
-
 import React, {useState, useCallback, useEffect} from 'react';
 import {
   View,
