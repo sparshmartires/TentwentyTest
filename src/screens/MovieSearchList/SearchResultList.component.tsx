@@ -2,30 +2,40 @@ import React from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 
 import {palette} from '../../theme/palette';
-import SearchResult from './SearchResult.component';
+import SearchResultItem from './SearchResultItem.component';
 import Text from '../../components/Text.component';
-import searchResults from './Results.config';
-import {filterResults} from '../../utils';
+import {SearchResult} from '@search';
 
 interface SearchResultListProps {
-  searchText: string;
+  filteredResults: SearchResult[];
+  showHeader: boolean;
 }
 
-const SearchResultList: React.FC<SearchResultListProps> = ({searchText}) => {
-  const filteredResults = filterResults(searchResults.movies, searchText);
-
+const SearchResultList: React.FC<SearchResultListProps> = ({
+  filteredResults,
+  showHeader,
+}) => {
   return (
     <View style={styles.searchResultContainer}>
-      <Text weight="medium" style={styles.text}>
-        {filteredResults.length > 0 ? 'Top Results' : 'No Results'}
-      </Text>
-      {filteredResults.length > 0 && <View style={styles.divider} />}
+      {showHeader && (
+        <Text weight="medium" style={styles.text}>
+          {filteredResults?.length > 0 ? 'Top Results' : 'No Results'}
+        </Text>
+      )}
+      {showHeader && filteredResults.length > 0 && (
+        <View style={styles.divider} />
+      )}
       <FlatList
         data={filteredResults}
-        renderItem={({item}) => <SearchResult {...item} />}
+        renderItem={({item}) => <SearchResultItem {...item} />}
         keyExtractor={item => item.title.toString()}
         numColumns={1}
-        contentContainerStyle={styles.searchResultList}
+        contentContainerStyle={[
+          styles.searchResultList,
+          !showHeader && {
+            paddingVertical: 0,
+          },
+        ]}
         showsVerticalScrollIndicator={false}
       />
     </View>

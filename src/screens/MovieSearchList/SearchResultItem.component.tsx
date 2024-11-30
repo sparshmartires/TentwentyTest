@@ -17,7 +17,7 @@ interface MovieListItemProps {
   onPressAction?: () => void;
 }
 
-const SearchResult: React.FC<MovieListItemProps> = ({
+const SearchResultItem: React.FC<MovieListItemProps> = ({
   imageUrl,
   title,
   overview,
@@ -76,4 +76,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SearchResult;
+export default SearchResultItem;

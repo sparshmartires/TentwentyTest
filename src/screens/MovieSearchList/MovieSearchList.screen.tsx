@@ -6,9 +6,19 @@ import SearchBar from '../../components/SearchBar.component';
 import {palette} from '../../theme/palette';
 import SearchResultList from './SearchResultList.component';
 import MovieCategoryList from './MovieCategoryList.component';
+import { navigateTo } from '../../navigation/root.navigator';
+import searchResults from './Results.config';
+import {filterResults} from '../../utils';
 
 const MovieSearchList: React.FC = () => {
   const [searchText, setSearchText] = useState('');
+
+  const filteredResults = filterResults(searchResults.movies, searchText);
+  
+  const onSubmitSearch = () => {
+    if(!searchText?.length) return
+    navigateTo('MovieResultScreen', {movieIds: filteredResults.map((result)=>result.id) });
+  };
 
   return (
     <View style={styles.container}>
@@ -19,13 +29,14 @@ const MovieSearchList: React.FC = () => {
           value={searchText}
           onChangeText={setSearchText}
           onClear={() => setSearchText('')}
+          onSubmit={onSubmitSearch}
           searchIcon={images.search}
           clearIcon={images.close}
         />
       </View>
       {/* Categories Grid */}
       {searchText?.length > 0 ? (
-        <SearchResultList searchText={searchText} />
+        <SearchResultList showHeader filteredResults={filteredResults} />
       ) : (
         <MovieCategoryList />
       )}

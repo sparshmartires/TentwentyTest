@@ -7,7 +7,9 @@ import {
   TextInputProps,
   Image,
   ImageSourcePropType,
+  Keyboard,
 } from 'react-native';
+
 import { palette } from '../theme/palette';
 
 interface SearchBarProps extends TextInputProps {
@@ -17,6 +19,7 @@ interface SearchBarProps extends TextInputProps {
   onClear?: () => void;
   containerStyle?: object;
   inputStyle?: object;
+  onSubmit?: (text: string) => void;
   searchIcon?: ImageSourcePropType; 
   clearIcon?: ImageSourcePropType; 
 }
@@ -26,6 +29,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   value = '',
   onChangeText,
   onClear,
+  onSubmit,
   containerStyle,
   inputStyle,
   searchIcon,
@@ -47,6 +51,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
       onClear();
     }
   };
+  const handleSubmitEditing = () => {
+    if (onSubmit) {
+      onSubmit(text); // Trigger the onSubmit callback with the current text
+    }
+    Keyboard.dismiss(); // Optionally dismiss the keyboard after submission
+  };
 
   return (
     <View style={[styles.container, containerStyle]}>
@@ -62,6 +72,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         style={[styles.input, inputStyle]}
         placeholder={placeholder}
         value={text}
+        onSubmitEditing={handleSubmitEditing}
         onChangeText={handleTextChange}
         {...props}
       />
