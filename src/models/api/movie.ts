@@ -1,4 +1,4 @@
-declare module '@movie' {
+declare module '@api/movie' {
   import {Movie} from '@movie';
   interface UpcomingMovieApiResponse {
     dates?: {
@@ -23,5 +23,12 @@ declare module '@movie' {
   }
   interface MovieImageApiResponse {
     backdrops: MovieImage[];
+  }
+  type MovieDetailsApiResponse = Movie;
+  interface MovieCardProps {
+    id: number;
+    title: string;
+    imageUrl: string;
+    onPress?: () => void;
   }
 }

@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 
-import Text from '../Text.component';
-import {palette} from '../../theme/palette';
+import Text from './Text.component';
+import {palette} from '../theme/palette';
 
 interface ChipProps {
   label: string;

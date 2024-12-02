@@ -1,3 +1,4 @@
+import { MovieCardProps } from '@api/movie';
 import React, {useState, useCallback, useEffect} from 'react';
 import {
   View,
@@ -15,16 +16,11 @@ import {useGetUpcomingMoviesQuery} from '../../services/api/movie';
 import Text from '../../components/Text.component';
 import {navigateTo} from '../../navigation/root.navigator';
 
-interface Movie {
-  id: number;
-  title: string;
-  imageUrl: string;
-}
 
 const UpcomingMovieListScreen: React.FC = () => {
   // Pagination state
   const [page, setPage] = useState(1);
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const [movies, setMovies] = useState<MovieCardProps[]>([]);
   const [isEndReached, setIsEndReached] = useState(false); // To prevent multiple triggers
 
   // Fetch movies using RTK query

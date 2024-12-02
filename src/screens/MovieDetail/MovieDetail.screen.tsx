@@ -10,10 +10,11 @@ import {
   StatusBar,
   Platform,
 } from 'react-native';
+
 import {palette} from '../../theme/palette';
 import Text from '../../components/Text.component';
 import images from '../../assets/images';
-import Chip from '../../components/Chip/Chip.component';
+import Chip from '../../components/Chip.component';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {StackParamList} from '../../navigation/app.navigator';
 import {
@@ -22,9 +23,9 @@ import {
   useGetMovieVideosByIdQuery,
 } from '../../services/api/movie';
 import {formatDate, getRandomColor} from '../../utils';
-
 import {goBack, navigateTo} from '../../navigation/root.navigator';
 import LinearGradient from 'react-native-linear-gradient';
+import Button from '../../components/Button.component';
 
 type MovieDetailProps = NativeStackScreenProps<
   StackParamList,
@@ -100,21 +101,17 @@ const MovieDetailScreen = ({route}: MovieDetailProps) => {
               </Text>
             )}
 
-            <Pressable
-              style={styles.getTicketsButton}
-              onPress={onGetTicketsPress}>
-              <Text style={styles.getTicketsText} weight="bold">
-                Get Tickets
-              </Text>
-            </Pressable>
+            <Button
+              type="primary"
+              label="Get Tickets"
+              onPress={onGetTicketsPress}
+            />
 
-            <Pressable
-              style={styles.trailerButton}
-              onPress={onWatchTrailerPress}>
-              <Text style={styles.trailerText} weight="bold">
-                ▶ Watch Trailer
-              </Text>
-            </Pressable>
+            <Button
+              type="secondary"
+              label="▶ Watch Trailer"
+              onPress={onWatchTrailerPress}
+            />
           </View>
         </ImageBackground>
 
@@ -180,41 +177,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingTop: 195,
   },
-  getTicketsButton: {
-    backgroundColor: palette.primary,
-    alignSelf: 'center',
-    borderRadius: 10,
-    width: 243,
-    paddingVertical: 15,
-    alignItems: 'center',
-    marginTop: 8,
-    marginBottom: 10,
-    fontSize: 14,
-  },
   divider: {
     height: 1,
     width: '100%',
     backgroundColor: palette.greyAccent,
     paddingHorizontal: 40,
   },
-  getTicketsText: {
-    color: palette.white,
-  },
-  trailerButton: {
-    borderWidth: 1,
-    borderColor: palette.primary,
-    borderRadius: 10,
-    width: 243,
-    alignSelf: 'center',
-    alignItems: 'center',
-    paddingVertical: 15,
-    fontSize: 14,
-  },
   gradientOverlay: {
     ...StyleSheet.absoluteFillObject, // Ensures the gradient covers the entire image
-  },
-  trailerText: {
-    color: palette.white,
   },
   genresContainer: {
     paddingHorizontal: 40,

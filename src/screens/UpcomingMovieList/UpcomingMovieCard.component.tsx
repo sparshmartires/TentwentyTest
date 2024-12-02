@@ -1,17 +1,12 @@
-// File: src/components/MovieCard.tsx
-
+import { MovieCardProps } from '@api/movie';
 import React from 'react';
-import { View, Image, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
+import { View, Image, StyleSheet, Pressable } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import { palette } from '../../theme/palette';
 import Text from '../../components/Text.component';
 
-interface MovieCardProps {
-  title: string;
-  imageUrl: string;
-  onPress?: () => void;
-}
+
 
 const UpcomingMovieCard: React.FC<MovieCardProps> = ({ title, imageUrl, onPress }) => {
   return (

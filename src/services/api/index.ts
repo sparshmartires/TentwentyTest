@@ -8,12 +8,14 @@ import {
   fetchBaseQuery,
 } from '@reduxjs/toolkit/query/react';
 
+import config from '../../../config';
+
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://api.themoviedb.org/3/',
   prepareHeaders: headers => {
     headers.set(
       'Authorization',
-      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZmZlNDQ0NzYwOWRiNWFmNmFkYTgzOWRhMDE0NTk5NSIsIm5iZiI6MTczMjg1OTIzNC4zNzA1MzI4LCJzdWIiOiI2NzQ5NTRhMDBkYTUyZTI3N2VmNDBiYmMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.twlN0gmuhVK8G6VdyDLZ2nhcIO8JxrKAmkplg69MTMw',
+      config.movieApiToken,
     );
     headers.set('accept', 'application/json');
     return headers;
