@@ -39,9 +39,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const [text, setText] = useState(value);
 
   const handleTextChange = (input: string) => {
-    setText(input);
+    setText(input.trim());
     if (onChangeText) {
-      onChangeText(input);
+      onChangeText(input.trim());
     }
   };
 
