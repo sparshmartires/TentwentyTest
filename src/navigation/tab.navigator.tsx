@@ -1,4 +1,4 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import {
   GestureResponderEvent,
@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import {palette} from '../theme/palette';
+import { palette } from '../theme/palette';
 import UpcomingMovieListScreen from '../screens/UpcomingMovieList/UpcomingMovieList.screen';
 import styles from './styles';
 import tabConfig from './tab.config';
@@ -46,7 +46,7 @@ const renderTabBarButton = (
 const TabNavigator = () => {
   return (
     <Tab.Navigator
-      screenOptions={({route}) => ({
+      screenOptions={({ route }) => ({
         tabBarStyle: {
           backgroundColor: palette.darkBrown,
           height: 75,
@@ -60,7 +60,7 @@ const TabNavigator = () => {
       <Tab.Screen
         name={tabConfig.Dashboard.name as keyof TabParamList}
         options={{
-          tabBarButton: ({onPress}) =>
+          tabBarButton: ({ onPress }) =>
             renderTabBarButton(onPress, tabConfig.Dashboard.name),
         }}
         component={UpcomingMovieListScreen}
@@ -69,14 +69,14 @@ const TabNavigator = () => {
         name={tabConfig.Watch.name as keyof TabParamList}
         component={UpcomingMovieListScreen}
         options={{
-          tabBarButton: ({onPress}) =>
+          tabBarButton: ({ onPress }) =>
             renderTabBarButton(onPress, tabConfig.Watch.name),
         }}
       />
       <Tab.Screen
         name={tabConfig.MediaLibrary.name as keyof TabParamList}
         options={{
-          tabBarButton: ({onPress}) =>
+          tabBarButton: ({ onPress }) =>
             renderTabBarButton(onPress, tabConfig.MediaLibrary.name),
         }}
         component={UpcomingMovieListScreen}
@@ -84,7 +84,7 @@ const TabNavigator = () => {
       <Tab.Screen
         name={tabConfig.More.name as keyof TabParamList}
         options={{
-          tabBarButton: ({onPress}) =>
+          tabBarButton: ({ onPress }) =>
             renderTabBarButton(onPress, tabConfig.More.name),
         }}
         component={UpcomingMovieListScreen}

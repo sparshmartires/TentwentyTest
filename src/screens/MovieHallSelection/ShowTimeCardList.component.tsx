@@ -18,14 +18,17 @@ interface ShowtimeCardProps {
   onShowtimePress: (id: number) => void;
 }
 
-const ShowTimeCardList: React.FC<ShowtimeCardProps> = ({ showtimes, selectedTime, onShowtimePress }) => {
+const ShowTimeCardList: React.FC<ShowtimeCardProps> = ({
+  showtimes,
+  selectedTime,
+  onShowtimePress,
+}) => {
   return (
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
-      style={styles.hallSelectionContainerList}
-    >
-      {showtimes.map((show) => (
+      style={styles.hallSelectionContainerList}>
+      {showtimes.map(show => (
         <View key={show.id} style={styles.hallSelectionContainer}>
           <View style={styles.showtimeCardTitleContainer}>
             <Text style={styles.showtimeText} weight="medium">
@@ -39,8 +42,7 @@ const ShowTimeCardList: React.FC<ShowtimeCardProps> = ({ showtimes, selectedTime
               styles.hallLayoutCard,
               selectedTime === show.id && styles.hallLayoutCardSelected,
             ]}
-            onPress={() => onShowtimePress(show.id)}
-          >
+            onPress={() => onShowtimePress(show.id)}>
             <Image source={show.image} style={styles.hallImage} />
           </Pressable>
 

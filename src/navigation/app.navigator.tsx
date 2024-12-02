@@ -1,4 +1,4 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import UpcomingMovieListScreen from '../screens/UpcomingMovieList/UpcomingMovieList.screen';
 import TabNavigator from './tab.navigator';
@@ -17,8 +17,8 @@ export type StackParamList = {
     movieId: number;
   };
   MovieResultScreen: {
-   movieIds: number[]
-  },
+    movieIds: number[];
+  };
   TrailerPlayerScreen: {
     videoKey: string;
   };
@@ -42,8 +42,14 @@ const AppNavigator = () => {
       <Stack.Screen name="MovieSearchList" component={MovieSearchList} />
       <Stack.Screen name="MovieResultScreen" component={MovieResultScreen} />
       <Stack.Screen name="MovieDetailScreen" component={MovieDetailScreen} />
-      <Stack.Screen name="MovieHallSelectionScreen" component={MovieHallSelectionScreen} />
-      <Stack.Screen name="SeatSelectionScreen" component={SeatSelectionScreen} />
+      <Stack.Screen
+        name="MovieHallSelectionScreen"
+        component={MovieHallSelectionScreen}
+      />
+      <Stack.Screen
+        name="SeatSelectionScreen"
+        component={SeatSelectionScreen}
+      />
       <Stack.Screen
         name="TrailerPlayerScreen"
         component={TrailerPlayerScreen}

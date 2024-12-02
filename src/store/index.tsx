@@ -1,7 +1,7 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { persistStore } from "redux-persist";
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { persistStore } from 'redux-persist';
 
-import { api, rtkQueryErrorLogger } from "../services/api";
+import { api, rtkQueryErrorLogger } from '../services/api';
 
 const reducers = combineReducers({
   [api.reducerPath]: api.reducer,
@@ -9,7 +9,7 @@ const reducers = combineReducers({
 
 const store = configureStore({
   reducer: reducers,
-  middleware: (getDefaultMiddleware) =>
+  middleware: getDefaultMiddleware =>
     getDefaultMiddleware({ serializableCheck: false }).concat([
       api.middleware,
       rtkQueryErrorLogger,

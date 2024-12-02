@@ -9,25 +9,27 @@ interface DateSelectorProps {
   onDatePress: (date: string) => void;
 }
 
-const DateSelector: React.FC<DateSelectorProps> = ({ dates, selectedDate, onDatePress }) => {
+const DateSelector: React.FC<DateSelectorProps> = ({
+  dates,
+  selectedDate,
+  onDatePress,
+}) => {
   return (
     <View style={styles.datesList}>
-      {dates.map((date) => (
+      {dates.map(date => (
         <Pressable
           key={date}
           style={[
             styles.dateButton,
             selectedDate === date && styles.dateButtonSelected,
           ]}
-          onPress={() => onDatePress(date)}
-        >
+          onPress={() => onDatePress(date)}>
           <Text
             style={[
               styles.dateText,
               selectedDate === date && styles.dateTextSelected,
             ]}
-            weight="medium"
-          >
+            weight="medium">
             {date}
           </Text>
         </Pressable>

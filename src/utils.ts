@@ -1,6 +1,6 @@
 import { SearchResult } from '@search';
 
-import {palette} from './theme/palette';
+import { palette } from './theme/palette';
 
 const colors = [palette.green, palette.pink, palette.purple, palette.yellow];
 
@@ -26,7 +26,10 @@ export const formatDate = (inputDate: string): string => {
  * @param searchText - Text to filter the movies by.
  * @returns Filtered array of movies.
  */
-export const filterResults = (movies: SearchResult[], searchText: string): SearchResult[] => {
+export const filterResults = (
+  movies: SearchResult[],
+  searchText: string,
+): SearchResult[] => {
   if (!searchText) return movies; // Return all movies if no searchText
   const lowerCaseSearchText = searchText.toLowerCase();
   return movies.filter(

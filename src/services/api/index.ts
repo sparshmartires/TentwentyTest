@@ -1,6 +1,6 @@
-import {QueryActionArg, QueryActionPayload} from '@api';
-import type {Middleware} from '@reduxjs/toolkit';
-import {isRejected, isRejectedWithValue} from '@reduxjs/toolkit';
+import { QueryActionArg, QueryActionPayload } from '@api';
+import type { Middleware } from '@reduxjs/toolkit';
+import { isRejected, isRejectedWithValue } from '@reduxjs/toolkit';
 import {
   BaseQueryApi,
   createApi,
@@ -13,10 +13,7 @@ import config from '../../../config';
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://api.themoviedb.org/3/',
   prepareHeaders: headers => {
-    headers.set(
-      'Authorization',
-      config.movieApiToken,
-    );
+    headers.set('Authorization', config.movieApiToken);
     headers.set('accept', 'application/json');
     return headers;
   },

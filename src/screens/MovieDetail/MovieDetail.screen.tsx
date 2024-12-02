@@ -11,19 +11,19 @@ import {
   Platform,
 } from 'react-native';
 
-import {palette} from '../../theme/palette';
+import { palette } from '../../theme/palette';
 import Text from '../../components/Text.component';
 import images from '../../assets/images';
 import Chip from '../../components/Chip.component';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {StackParamList} from '../../navigation/app.navigator';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { StackParamList } from '../../navigation/app.navigator';
 import {
   useGetMovieDetailByIdQuery,
   useGetMovieImagesByIdQuery,
   useGetMovieVideosByIdQuery,
 } from '../../services/api/movie';
-import {formatDate, getRandomColor} from '../../utils';
-import {goBack, navigateTo} from '../../navigation/root.navigator';
+import { formatDate, getRandomColor } from '../../utils';
+import { goBack, navigateTo } from '../../navigation/root.navigator';
 import LinearGradient from 'react-native-linear-gradient';
 import Button from '../../components/Button.component';
 
@@ -32,17 +32,17 @@ type MovieDetailProps = NativeStackScreenProps<
   'MovieDetailScreen'
 >;
 
-const MovieDetailScreen = ({route}: MovieDetailProps) => {
+const MovieDetailScreen = ({ route }: MovieDetailProps) => {
   const statusBarHeight =
     Platform.OS === 'android' ? StatusBar.currentHeight || 0 : 0;
   const movieId = route.params?.movieId;
-  const {data, isLoading, isFetching} = useGetMovieDetailByIdQuery({
+  const { data, isLoading, isFetching } = useGetMovieDetailByIdQuery({
     movieId,
   });
-  const {data: movieVideos} = useGetMovieVideosByIdQuery({
+  const { data: movieVideos } = useGetMovieVideosByIdQuery({
     movieId,
   });
-  const {data: movieImages} = useGetMovieImagesByIdQuery({
+  const { data: movieImages } = useGetMovieImagesByIdQuery({
     movieId,
   });
   const onBackPress = () => {
@@ -65,7 +65,7 @@ const MovieDetailScreen = ({route}: MovieDetailProps) => {
     return <Text>Loading...</Text>;
   }
 
-  const {release_date, genres, overview} = data ?? {};
+  const { release_date, genres, overview } = data ?? {};
 
   return (
     <SafeAreaView style={styles.container}>
@@ -76,13 +76,13 @@ const MovieDetailScreen = ({route}: MovieDetailProps) => {
           source={{
             uri: `https://image.tmdb.org/t/p/w500${movieImages?.backdrops[0]?.file_path}`, // Replace with the actual poster image URL
           }}
-          style={[styles.headerBackground, {marginTop: -statusBarHeight}]}
+          style={[styles.headerBackground, { marginTop: -statusBarHeight }]}
           resizeMode="cover">
           <LinearGradient
             colors={['rgba(0, 0, 0, 0.5)', 'rgba(0, 0, 0, 0)']}
             style={styles.gradientOverlay}
-            start={{x: 0, y: 1}}
-            end={{x: 0, y: 0}}
+            start={{ x: 0, y: 1 }}
+            end={{ x: 0, y: 0 }}
           />
           <View style={styles.headerContent}>
             <View style={styles.backArrowContainer}>

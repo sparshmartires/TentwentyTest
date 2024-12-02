@@ -1,7 +1,7 @@
-import images from "../../assets/images";
+import images from '../../assets/images';
 
- export const dates = ['5 Mar', '6 Mar', '7 Mar', '8 Mar', '9 Mar'];
- export const showtimes = [
+export const dates = ['5 Mar', '6 Mar', '7 Mar', '8 Mar', '9 Mar'];
+export const showtimes = [
   {
     id: 1,
     time: '12:30',

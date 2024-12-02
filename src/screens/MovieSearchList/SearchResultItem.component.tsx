@@ -9,7 +9,7 @@ import {
 
 import Text from '../../components/Text.component';
 import images from '../../assets/images';
-import {palette} from '../../theme/palette';
+import { palette } from '../../theme/palette';
 
 interface MovieListItemProps {
   imageUrl: ImageSourcePropType;

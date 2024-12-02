@@ -1,10 +1,10 @@
 import React from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 
-import {palette} from '../../theme/palette';
+import { palette } from '../../theme/palette';
 import SearchResultItem from './SearchResultItem.component';
 import Text from '../../components/Text.component';
-import {SearchResult} from '@search';
+import { SearchResult } from '@search';
 import { navigateTo } from '../../navigation/root.navigator';
 
 interface SearchResultListProps {
@@ -16,12 +16,11 @@ const SearchResultList: React.FC<SearchResultListProps> = ({
   filteredResults,
   showHeader,
 }) => {
-
   const onSearchResultPress = (item: SearchResult) => {
-    if(!showHeader) return
-    navigateTo('MovieResultScreen', {movieIds: [item.id] });
-  }
-  
+    if (!showHeader) return;
+    navigateTo('MovieResultScreen', { movieIds: [item.id] });
+  };
+
   return (
     <View style={styles.searchResultContainer}>
       {showHeader && (
@@ -34,7 +33,12 @@ const SearchResultList: React.FC<SearchResultListProps> = ({
       )}
       <FlatList
         data={filteredResults}
-        renderItem={({item}) => <SearchResultItem {...item}  onPressAction={()=>onSearchResultPress(item)}/>}
+        renderItem={({ item }) => (
+          <SearchResultItem
+            {...item}
+            onPressAction={() => onSearchResultPress(item)}
+          />
+        )}
         keyExtractor={item => item.title.toString()}
         numColumns={1}
         contentContainerStyle={[

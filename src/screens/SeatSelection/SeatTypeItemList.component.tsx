@@ -4,7 +4,6 @@ import { StyleSheet, View, Image } from 'react-native';
 
 import Text from '../../components/Text.component';
 
-
 interface SeatItemTypeProps {
   SeatItemTypes: SeatType[];
 }

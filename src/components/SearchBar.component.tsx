@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   TextInput,
@@ -20,8 +20,8 @@ interface SearchBarProps extends TextInputProps {
   containerStyle?: object;
   inputStyle?: object;
   onSubmit?: (text: string) => void;
-  searchIcon?: ImageSourcePropType; 
-  clearIcon?: ImageSourcePropType; 
+  searchIcon?: ImageSourcePropType;
+  clearIcon?: ImageSourcePropType;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
@@ -61,12 +61,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   return (
     <View style={[styles.container, containerStyle]}>
       {/* Search Icon */}
-      {searchIcon && (
-        <Image
-          source={searchIcon}
-          style={styles.icon}
-        />
-      )}
+      {searchIcon && <Image source={searchIcon} style={styles.icon} />}
       {/* Text Input */}
       <TextInput
         style={[styles.input, inputStyle]}
@@ -78,11 +73,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
       />
       {/* Clear Icon */}
       {text.length > 0 && clearIcon && (
-        <Pressable onPress={handleClear} style={styles.clearButton} hitSlop={20}>
-          <Image
-            source={clearIcon}
-            style={styles.icon}
-          />
+        <Pressable
+          onPress={handleClear}
+          style={styles.clearButton}
+          hitSlop={20}>
+          <Image source={clearIcon} style={styles.icon} />
         </Pressable>
       )}
     </View>

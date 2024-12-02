@@ -1,12 +1,12 @@
 import React from 'react';
-import {View, StyleSheet, Pressable, Image} from 'react-native';
+import { View, StyleSheet, Pressable, Image } from 'react-native';
 
-import {palette} from '../../theme/palette';
+import { palette } from '../../theme/palette';
 import images from '../../assets/images';
 import Text from '../../components/Text.component';
-import {goBack} from '../../navigation/root.navigator';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {StackParamList} from '../../navigation/app.navigator';
+import { goBack } from '../../navigation/root.navigator';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { StackParamList } from '../../navigation/app.navigator';
 import SearchResultList from '../MovieSearchList/SearchResultList.component';
 import searchResults from '../MovieSearchList/Results.config';
 
@@ -15,9 +15,9 @@ type MovieResultProps = NativeStackScreenProps<
   'MovieResultScreen'
 >;
 
-const MovieResultScreen = ({route}: MovieResultProps) => {
+const MovieResultScreen = ({ route }: MovieResultProps) => {
   const movieIds = route.params?.movieIds;
-  
+
   const onBackPress = () => {
     goBack();
   };
@@ -32,7 +32,12 @@ const MovieResultScreen = ({route}: MovieResultProps) => {
           {movieIds?.length} Results Found
         </Text>
       </View>
-      <SearchResultList showHeader={false} filteredResults={searchResults.movies.filter(movie => movieIds.includes(movie.id))} />
+      <SearchResultList
+        showHeader={false}
+        filteredResults={searchResults.movies.filter(movie =>
+          movieIds.includes(movie.id),
+        )}
+      />
     </View>
   );
 };

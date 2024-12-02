@@ -1,7 +1,7 @@
 import React from 'react';
-import {Pressable, StyleSheet, ViewStyle, TextStyle} from 'react-native';
+import { Pressable, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 
-import {palette} from '../theme/palette';
+import { palette } from '../theme/palette';
 import Text from './Text.component';
 
 interface ButtonProps {

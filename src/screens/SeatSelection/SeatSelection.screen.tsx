@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import {StyleSheet, View, ScrollView, Pressable, Image} from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, ScrollView, Pressable, Image } from 'react-native';
 
 import images from '../../assets/images';
 import Text from '../../components/Text.component';
-import {palette} from '../../theme/palette';
-import {goBack} from '../../navigation/root.navigator';
+import { palette } from '../../theme/palette';
+import { goBack } from '../../navigation/root.navigator';
 import Header from '../../components/Header.component';
 import { SeatItemTypes, seatTypes, seatingArraingment } from './Seat.config';
 import SeatRow from './SeatRow.component';

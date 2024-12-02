@@ -1,15 +1,10 @@
-import React, {useRef, useEffect, useState} from 'react';
-import {
-  View,
-  Button,
-  StyleSheet,
-  Dimensions,
-} from 'react-native';
+import React, { useRef, useEffect, useState } from 'react';
+import { View, Button, StyleSheet, Dimensions } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-import {StackParamList} from '../navigation/app.navigator';
-import {goBack} from '../navigation/root.navigator';
+import { StackParamList } from '../navigation/app.navigator';
+import { goBack } from '../navigation/root.navigator';
 import { palette } from '../theme/palette';
 
 type TrailerPlayerProps = NativeStackScreenProps<
@@ -17,15 +12,15 @@ type TrailerPlayerProps = NativeStackScreenProps<
   'TrailerPlayerScreen'
 >;
 
-const TrailerPlayerScreen: React.FC<TrailerPlayerProps> = ({route}) => {
-  const {videoKey} = route.params; // Extract video key from params
+const TrailerPlayerScreen: React.FC<TrailerPlayerProps> = ({ route }) => {
+  const { videoKey } = route.params; // Extract video key from params
   const playerRef = useRef(null); // Reference for the player
 
   const [dimensions, setDimensions] = useState(Dimensions.get('screen'));
 
   useEffect(() => {
     // Update dimensions on orientation change
-    const subscription = Dimensions.addEventListener('change', ({screen}) => {
+    const subscription = Dimensions.addEventListener('change', ({ screen }) => {
       setDimensions(screen);
     });
 
@@ -65,11 +60,11 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     position: 'absolute',
-    top: 20, 
-    right: 20, 
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', 
-    borderRadius: 8, 
-    padding: 4, 
+    top: 20,
+    right: 20,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    borderRadius: 8,
+    padding: 4,
   },
 });
 

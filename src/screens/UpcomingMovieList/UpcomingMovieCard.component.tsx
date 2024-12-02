@@ -6,20 +6,24 @@ import LinearGradient from 'react-native-linear-gradient';
 import { palette } from '../../theme/palette';
 import Text from '../../components/Text.component';
 
-
-
-const UpcomingMovieCard: React.FC<MovieCardProps> = ({ title, imageUrl, onPress }) => {
+const UpcomingMovieCard: React.FC<MovieCardProps> = ({
+  title,
+  imageUrl,
+  onPress,
+}) => {
   return (
     <Pressable style={styles.card} onPress={onPress}>
       <Image source={{ uri: imageUrl }} style={styles.image} />
-      <LinearGradient 
-        colors={['rgba(0,0,0,0)', '#000000']} 
-        style={styles.gradient} 
-        start={{ x: 0.5, y: 0 }} 
+      <LinearGradient
+        colors={['rgba(0,0,0,0)', '#000000']}
+        style={styles.gradient}
+        start={{ x: 0.5, y: 0 }}
         end={{ x: 0.5, y: 1 }}
       />
       <View style={styles.overlay}>
-        <Text weight='medium' style={styles.title}>{title}</Text>
+        <Text weight="medium" style={styles.title}>
+          {title}
+        </Text>
       </View>
     </Pressable>
   );
@@ -29,7 +33,7 @@ const styles = StyleSheet.create({
   card: {
     borderRadius: 10,
     overflow: 'hidden',
-    position: 'relative', 
+    position: 'relative',
   },
   image: {
     width: '100%',

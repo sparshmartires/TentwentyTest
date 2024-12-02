@@ -1,5 +1,5 @@
 import { MovieCardProps } from '@api/movie';
-import React, {useState, useCallback, useEffect} from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import {
   View,
   FlatList,
@@ -11,11 +11,10 @@ import {
 
 import images from '../../assets/images';
 import UpcomingMovieCard from './UpcomingMovieCard.component';
-import {palette} from '../../theme/palette';
-import {useGetUpcomingMoviesQuery} from '../../services/api/movie';
+import { palette } from '../../theme/palette';
+import { useGetUpcomingMoviesQuery } from '../../services/api/movie';
 import Text from '../../components/Text.component';
-import {navigateTo} from '../../navigation/root.navigator';
-
+import { navigateTo } from '../../navigation/root.navigator';
 
 const UpcomingMovieListScreen: React.FC = () => {
   // Pagination state
@@ -24,9 +23,9 @@ const UpcomingMovieListScreen: React.FC = () => {
   const [isEndReached, setIsEndReached] = useState(false); // To prevent multiple triggers
 
   // Fetch movies using RTK query
-  const {data, isLoading, isFetching, isError} = useGetUpcomingMoviesQuery(
-    {page},
-    {skip: false}, // Always fetch for the given page
+  const { data, isLoading, isFetching, isError } = useGetUpcomingMoviesQuery(
+    { page },
+    { skip: false }, // Always fetch for the given page
   );
 
   // Update the movie list when new data is fetched
@@ -56,7 +55,7 @@ const UpcomingMovieListScreen: React.FC = () => {
   };
 
   const onUpcomingMovieCardPress = (movieId: number) => {
-    navigateTo('MovieDetailScreen', {movieId});
+    navigateTo('MovieDetailScreen', { movieId });
   };
 
   return (
@@ -67,7 +66,7 @@ const UpcomingMovieListScreen: React.FC = () => {
           Watch
         </Text>
         <Pressable
-        hitSlop={20}
+          hitSlop={20}
           style={styles.headerImageContainer}
           onPress={handleSearchPress}>
           <Image source={images.search} />
@@ -80,7 +79,7 @@ const UpcomingMovieListScreen: React.FC = () => {
       ) : (
         <FlatList
           data={movies}
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
             <UpcomingMovieCard
               {...item}
               onPress={() => onUpcomingMovieCardPress(item.id)}

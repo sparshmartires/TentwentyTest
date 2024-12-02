@@ -1,8 +1,8 @@
 import React from 'react';
-import {View, Image, StyleSheet, Pressable} from 'react-native';
+import { View, Image, StyleSheet, Pressable } from 'react-native';
 
 import Text from '../../components/Text.component';
-import {palette} from '../../theme/palette';
+import { palette } from '../../theme/palette';
 
 interface MovieCategoryProps {
   item: {
@@ -12,7 +12,7 @@ interface MovieCategoryProps {
   };
 }
 
-const MovieCategory: React.FC<MovieCategoryProps> = ({item}) => {
+const MovieCategory: React.FC<MovieCategoryProps> = ({ item }) => {
   return (
     <Pressable
       style={[

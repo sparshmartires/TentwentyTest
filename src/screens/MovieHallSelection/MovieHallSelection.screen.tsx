@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, Pressable} from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, Pressable } from 'react-native';
 
 import Text from '../../components/Text.component';
-import {goBack, navigateTo} from '../../navigation/root.navigator';
-import {palette} from '../../theme/palette';
+import { goBack, navigateTo } from '../../navigation/root.navigator';
+import { palette } from '../../theme/palette';
 import Header from '../../components/Header.component';
 import DateSelector from './DateSelector.component';
 import ShowTimeCardList from './ShowTimeCardList.component';
